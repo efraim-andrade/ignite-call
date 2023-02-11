@@ -4,12 +4,12 @@ import Image from 'next/image'
 import previewImage from '~/assets/app-preview.png'
 import { ClaimUsernameForm } from '~/pages/home/components/ClaimUsernameForm'
 
-import { Container, Hero, Preview } from './styles'
+import * as S from './styles'
 
 export default function Home() {
   return (
-    <Container>
-      <Hero>
+    <S.Container>
+      <S.Hero>
         <Heading size="4xl">Agendamento descomplicado</Heading>
 
         <Text size="xl">
@@ -18,9 +18,9 @@ export default function Home() {
         </Text>
 
         <ClaimUsernameForm />
-      </Hero>
+      </S.Hero>
 
-      <Preview>
+      <S.Preview>
         <Image
           priority
           height="400"
@@ -28,7 +28,7 @@ export default function Home() {
           src={previewImage}
           alt="Calendário simbolizando aplicação em funcionamento"
         />
-      </Preview>
-    </Container>
+      </S.Preview>
+    </S.Container>
   )
 }

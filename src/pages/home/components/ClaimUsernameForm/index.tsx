@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { Form, FormAnnotation } from './styles'
+import * as S from './styles'
 
 const claimUsernameFormSchema = z.object({
   username: z
@@ -33,7 +33,7 @@ export function ClaimUsernameForm() {
 
   return (
     <>
-      <Form as="form" onSubmit={handleSubmit(handleClaimUsername)}>
+      <S.Form as="form" onSubmit={handleSubmit(handleClaimUsername)}>
         <TextInput
           size="sm"
           prefix="ignite.com/"
@@ -45,15 +45,15 @@ export function ClaimUsernameForm() {
           Reservar
           <ArrowRight />
         </Button>
-      </Form>
+      </S.Form>
 
-      <FormAnnotation>
+      <S.FormAnnotation>
         <Text size="sm">
           {errors.username
             ? errors.username?.message
             : 'Digite o nome do usuário'}
         </Text>
-      </FormAnnotation>
+      </S.FormAnnotation>
     </>
   )
 }
