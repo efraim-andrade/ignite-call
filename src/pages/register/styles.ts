@@ -33,3 +33,7 @@ export const Form = styled(Box, {
     flexDirection: 'column',
   },
 })
+
+export const FormError = styled(Text, {
+  color: '#f75a68',
+})
