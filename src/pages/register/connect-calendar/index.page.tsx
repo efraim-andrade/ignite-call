@@ -1,10 +1,22 @@
 import { Button, Heading, MultiStep, Text } from '@molao-ui/react'
-import { ArrowRight } from 'phosphor-react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { ArrowRight, Check } from 'phosphor-react'
 
 import { Container, Header } from '../styles'
 import * as S from './styles'
 
 export default function Register() {
+  const router = useRouter()
+  const session = useSession()
+
+  const hasAuthError = !!router.query.error
+  const isSignedIn = session.status === 'authenticated'
+
+  async function handleConnectCalendar() {
+    return await signIn('google')
+  }
+
   return (
     <Container>
       <Header>
@@ -22,12 +34,29 @@ export default function Register() {
         <S.ConnectItem>
           <Text>Google Agenda</Text>
 
-          <Button variant="secondary" size="sm">
-            Conectar <ArrowRight />
-          </Button>
+          {isSignedIn ? (
+            <Button size="sm" disabled>
+              Conectado <Check />
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={handleConnectCalendar}
+            >
+              Conectar <ArrowRight />
+            </Button>
+          )}
         </S.ConnectItem>
 
-        <Button type="submit">
+        {hasAuthError && (
+          <S.AuthError size="sm">
+            Falha ao se conectar ao Google, verifique se você habilitou as
+            permissões de acesso ao Google Agenda.
+          </S.AuthError>
+        )}
+
+        <Button type="submit" disabled={!isSignedIn}>
           Próximo passo <ArrowRight />
         </Button>
       </S.ConnectBox>
