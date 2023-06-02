@@ -29,6 +29,7 @@ export default async function handler(
       username,
     },
   })
+  console.log("🚀 ~ user:", user);
 
   setCookie({ res }, '@ignite-call:userId', user.id, {
     maxAge: 60 * 60 * 24 * 7, // 7 days
