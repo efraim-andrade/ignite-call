@@ -47,7 +47,22 @@ export function Calendar() {
               <S.CalendarDay>2</S.CalendarDay>
             </td>
             <td>
-              <S.CalendarDay>3</S.CalendarDay>
+              <S.CalendarDay disabled>3</S.CalendarDay>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <S.CalendarDay>5</S.CalendarDay>
+            </td>
+            <td>
+              <S.CalendarDay>6</S.CalendarDay>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <S.CalendarDay disabled>10</S.CalendarDay>
             </td>
           </tr>
         </tbody>
