@@ -1,17 +1,27 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
-import { Button, Heading, MultiStep, Text, TextArea } from '@molao-ui/react'
-
-import * as S from './styles'
-import { Container, Header } from '../styles'
+import {
+  Avatar,
+  Button,
+  Heading,
+  MultiStep,
+  Text,
+  TextArea,
+} from '@molao-ui/react'
 import { useSession } from 'next-auth/react'
 import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
+import { useRouter } from 'next/router'
+
 import { buildNextAuthOptions } from '~/pages/api/auth/[...nextauth].api'
+import { api } from '~/lib/axios'
+
+import { Container, Header } from '../styles'
+import * as S from './styles'
 
 const updateProfileSchema = z.object({
-  bio: z.string()
+  bio: z.string(),
 })
 
 type UpdateProfileData = z.infer<typeof updateProfileSchema>
@@ -26,10 +36,14 @@ export default function UpdateProfile() {
   })
 
   const session = useSession()
-  console.log("🚀 ~ UpdateProfile ~ session:", session)
+  const router = useRouter()
 
-  async function handleUpdateProfile() {
+  async function handleUpdateProfile(data: UpdateProfileData) {
+    await api.put('/users/profile', {
+      bio: data.bio,
+    })
 
+    await router.push(`/schedule/${session.data?.user.user.username}`)
   }
 
   return (
@@ -42,18 +56,23 @@ export default function UpdateProfile() {
           editar essas informações depois
         </Text>
 
-        <MultiStep size={4} currentStep={1} />
+        <MultiStep size={4} currentStep={4} />
       </Header>
 
       <S.ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
         <label>
           <Text size="sm">Foto de perfil</Text>
+
+          <Avatar
+            alt={session.data?.user.user.name}
+            src={session.data?.user.user.avatar_url}
+          />
         </label>
 
         <label>
           <Text size="sm">Sobre você</Text>
 
-          <TextArea placeholder="Seu nome" {...register('bio')} />
+          <TextArea {...register('bio')} />
 
           <S.FormAnnotation size="sm">
             Fale um pouco sobre você. Isto será exibido em sua página pessoal.
@@ -61,19 +80,23 @@ export default function UpdateProfile() {
         </label>
 
         <Button type="submit" disabled={isSubmitting}>
-          Finalizar 
+          Finalizar
         </Button>
       </S.ProfileBox>
     </Container>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req,res }) => {
-  const session = await getServerSession(req, res, buildNextAuthOptions(req, res))
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getServerSession(
+    req,
+    res,
+    buildNextAuthOptions(req, res),
+  )
 
   return {
     props: {
-      session
-    }
+      session,
+    },
   }
 }
