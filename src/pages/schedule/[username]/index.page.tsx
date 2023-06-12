@@ -2,6 +2,7 @@ import { Avatar, Heading, Text } from '@molao-ui/react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { prisma } from '~/lib/prisma'
+import ScheduleForm from '~/pages/schedule/[username]/ScheduleForm'
 
 import * as S from './styles'
 
@@ -22,6 +23,8 @@ export default function Schedule({ user }: ScheduleProps) {
         <Heading>{user.name}</Heading>
         <Text>{user.bio}</Text>
       </S.UserHeader>
+
+      <ScheduleForm />
     </S.Container>
   )
 }
