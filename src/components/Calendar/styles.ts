@@ -93,7 +93,7 @@ export const CalendarDay = styled('button', {
     opacity: 0.4,
   },
 
-  '&:not(:disabled)': {
+  '&:not(:disabled):hover': {
     background: '$gray500',
   },
 
