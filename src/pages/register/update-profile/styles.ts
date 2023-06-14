@@ -1,4 +1,4 @@
-import { Box, Text, styled } from "@molao-ui/react";
+import { Box, Text, styled } from '@molao-ui/react'
 
 export const ProfileBox = styled(Box, {
   gap: '$4',
@@ -11,9 +11,9 @@ export const ProfileBox = styled(Box, {
     gap: '$2',
     display: 'flex',
     flexDirection: 'column',
-  }
+  },
 })
 
 export const FormAnnotation = styled(Text, {
-  color: '$gray200'
+  color: '$gray200',
 })
