@@ -1,3 +1,6 @@
 {
-  "extends": ["@molao-ui/eslint-config", "next/core-web-vitals"]
+  "extends": ["@molao-ui/eslint-config", "next/core-web-vitals"],
+  "rules": {
+    "camelcase": "off"
+  }
 }
