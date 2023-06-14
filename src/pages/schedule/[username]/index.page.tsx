@@ -1,5 +1,6 @@
 import { Avatar, Heading, Text } from '@molao-ui/react'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { NextSeo } from 'next-seo'
 
 import { prisma } from '~/lib/prisma'
 import ScheduleForm from '~/pages/schedule/[username]/ScheduleForm'
@@ -16,16 +17,20 @@ interface ScheduleProps {
 
 export default function Schedule({ user }: ScheduleProps) {
   return (
-    <S.Container>
-      <S.UserHeader>
-        <Avatar src={user.avatarUrl} />
+    <>
+      <NextSeo title={`Agendar com ${user.name} | Ignite Call`} noindex />
 
-        <Heading>{user.name}</Heading>
-        <Text>{user.bio}</Text>
-      </S.UserHeader>
+      <S.Container>
+        <S.UserHeader>
+          <Avatar src={user.avatarUrl} />
 
-      <ScheduleForm />
-    </S.Container>
+          <Heading>{user.name}</Heading>
+          <Text>{user.bio}</Text>
+        </S.UserHeader>
+
+        <ScheduleForm />
+      </S.Container>
+    </>
   )
 }
 
