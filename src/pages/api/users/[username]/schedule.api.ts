@@ -75,6 +75,7 @@ export default async function handle(
     requestBody: {
       summary: `Ignite Call: ${name}`,
       description: observations,
+      colorId: '5',
       start: {
         dateTime: schedulingDate.format(),
       },
