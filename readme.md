@@ -31,5 +31,10 @@ https://ignite-call-lemon-two.vercel.app/
   - React Hook form
 
 - **Back**
+
   - Prisma
   - MySQL
+
+- **Deploy**
+  - Vercel
+  - Database PlanetScale
